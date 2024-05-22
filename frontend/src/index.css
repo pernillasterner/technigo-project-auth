@@ -5,9 +5,38 @@
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --vanilla: #fef9ef;
+  --ocean: #227c9d;
+  --oceanhover: #4095b4;
+  --oceanactive: #1a5f79;
+  --teal: #17c3b2;
+  --tealhover: #2fd5c5;
+  --tealactive: #119285;
+  --sunset: #ffcb77;
+  --sunsethover: #ffd798;
+  --sunsetactive: #c59d5d;
+  --raspberry: #fe6d73;
+  --raspberryhover: #ff9296;
+  --raspberryactive: #c15457;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+body {
+  background-color: var(--sunset);
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Remove this code. Should be global and in a separate component folder */
+input {
+  margin: 10px 0;
 }

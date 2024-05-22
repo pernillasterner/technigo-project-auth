@@ -3,5 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "postinstall": "npm install --prefix backend"
+  },
+  "dependencies": {
+    "react-router": "^6.23.1",
+    "styled-components": "^6.1.11"
   }
 }
