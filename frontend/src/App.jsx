@@ -1,3 +1,9 @@
+import { RegistrationForm } from "./components/RegistrationForm";
+
 export const App = () => {
-  return <div>Find me in src/app.jsx!</div>;
+  return (
+    <main>
+      <RegistrationForm />
+    </main>
+  );
 };
