@@ -74,6 +74,7 @@ export const RegistrationForm = () => {
     <RegistrationContainer>
       <Form onSubmit={handleSubmit}>
         <Heading>Register</Heading>
+
         <label>
           <input
             type="text"
@@ -138,7 +139,6 @@ export const RegistrationForm = () => {
           />
         </label>
         <ErrorMessage>{errorMessage}</ErrorMessage>
-        {/* TODO: Skapa komponent av button */}
         <Button type="submit">Register</Button>
       </Form>
     </RegistrationContainer>

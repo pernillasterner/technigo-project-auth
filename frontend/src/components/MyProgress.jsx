@@ -6,7 +6,5 @@ export const Progress = () => {
 
 const ProgressTitle = styled.h2`
   color: black;
+  margin: 0 auto;
 `;
-export const MyProgress = () => {
-  return <div>MyProgress</div>;
-};
