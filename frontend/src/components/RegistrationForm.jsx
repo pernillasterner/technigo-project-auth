@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLogin } from "../contexts/UserContext";
 import { Button } from "./Button";
+import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -17,6 +18,8 @@ export const RegistrationForm = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     // Remove error message when start typing again
@@ -59,6 +62,9 @@ export const RegistrationForm = () => {
         email,
         password,
       });
+
+      // Redirect to login page
+      navigate("/login");
     } catch (err) {
       console.error("Error registration user", err);
     }
@@ -68,6 +74,7 @@ export const RegistrationForm = () => {
     <RegistrationContainer>
       <Form onSubmit={handleSubmit}>
         <Heading>Register</Heading>
+
         <label>
           <input
             type="text"
@@ -132,7 +139,6 @@ export const RegistrationForm = () => {
           />
         </label>
         <ErrorMessage>{errorMessage}</ErrorMessage>
-        {/* TODO: Skapa komponent av button */}
         <Button type="submit">Register</Button>
       </Form>
     </RegistrationContainer>

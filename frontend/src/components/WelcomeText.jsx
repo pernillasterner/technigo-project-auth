@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const WelcomeText = () => {
   return (
     <WelcomeContainer>
-      <Heading>Welcome to PluggIn&apos</Heading>
+      <Heading>Welcome to PluggIn</Heading>
       <Text>
         The site were you can up your game in different school subjects.
       </Text>

@@ -7,7 +7,7 @@ import crypto from "crypto";
 // Defining port and connecting to mongoose
 const port = process.env.PORT || 8000;
 const app = express();
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/auth-users";
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/auth";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 

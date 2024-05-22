@@ -1,13 +1,26 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Header = () => {
   return (
     <HeaderContainer>
-      <Register>Register here</Register>
-      <Login>Log in</Login>
-      <Play>Play</Play>
-      <MyProgress>My progress</MyProgress>
-      <SignOut>Sign out</SignOut>
+      <StartPage className="startPage">
+        <Link to={`/register`}>
+          <Register>Register here</Register>
+        </Link>
+        <Link to={`/login`}>
+          <Login>Log in</Login>
+        </Link>
+      </StartPage>
+      <LoggedIn className="loggedIn">
+        <Link to={`/play`}>
+          <Play>Play</Play>
+        </Link>
+        <Link to={`/myprogress`}>
+          <MyProgress>My progress</MyProgress>
+        </Link>
+        <SignOut>Sign out</SignOut>
+      </LoggedIn>
     </HeaderContainer>
   );
 };
@@ -23,6 +36,13 @@ const HeaderContainer = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+`;
+
+const StartPage = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100vh;
 `;
 
 const Register = styled.p`
@@ -41,6 +61,14 @@ const Login = styled.p`
   &:hover {
     color: #fff9;
   }
+`;
+
+const LoggedIn = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100vh;
 `;
 
 const Play = styled.p`

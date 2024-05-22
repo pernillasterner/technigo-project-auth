@@ -7,4 +7,5 @@ export const Play = () => {
 };
 const PlayTitle = styled.h2`
   color: black;
+  margin: 0 auto;
 `;

@@ -12,8 +12,8 @@ export const UserProvider = ({ children }) => {
   const registerUser = async (userData) => {
     console.log(userData); // I get correct data
     try {
-      // Send data to backend /users
-      const response = await fetch("/users", {
+      // Ensure this points to the correct backend URL
+      const response = await fetch("http://localhost:8000/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,30 +31,6 @@ export const UserProvider = ({ children }) => {
       console.error("Error registering new user:", err);
     }
   };
-
-  // //Create user with username and password
-  // app.post("/users", async (req, res) => {
-  //   try {
-  //     const { username, firstName, lastName, age, email, password } = req.body;
-  //     const salt = bcrypt.genSaltSync(10);
-  //     const user = new User({
-  //       username,
-  //       firstName,
-  //       lastName,
-  //       age,
-  //       email,
-  //       password: bcrypt.hashSync(password, salt),
-  //     });
-  //     await user.save();
-  //     res.status(201).json(user);
-  //     //res.status(201).json({ id: user._id, accessToken: user.accessToken });
-  //   } catch (error) {
-  //     console.error("Error creating user:", error);
-  //     res
-  //       .status(400)
-  //       .json({ response: error, message: "Could not create user." });
-  //   }
-  // });
 
   return (
     <UserContext.Provider
