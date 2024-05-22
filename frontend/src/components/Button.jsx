@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const Buttons = styled.button`
-  background-color: #ff9102;
+export const Button = styled.button`
+  background-color: var(--raspberry);
   color: #fff;
   border-radius: 30px;
   border: none;
@@ -12,11 +12,13 @@ export const Buttons = styled.button`
   text-decoration: none;
 
   &:hover {
-    background-color: #ffba5f;
+    background-color: var(--raspberryhover);
     cursor: pointer;
   }
 
   &:active {
-    background-color: #db7c00;
+    background-color: var(--raspberryactive);
   }
 `;
+
+export default Button;

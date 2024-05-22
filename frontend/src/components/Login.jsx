@@ -1,27 +1,35 @@
 import styled from "styled-components";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useLogin } from "../contexts/UserContext";
+import { Button } from "./Button";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { login } = useLogin();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(username, password);
+    try {
+      await login(username, password);
+    } catch (error) {
+      setError("Invalid username or password");
+    }
   };
 
   return (
     <LoginContainer>
       <Form onSubmit={handleSubmit}>
-        <heading>Login</heading>
+        <Heading>Login</Heading>
+        {error && <Error>{error}</Error>}
         <label className="username">
           <input
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </label>
         <label className="password">
@@ -30,6 +38,7 @@ export const Login = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </label>
         <Button type="submit" className="loginBtn">
@@ -54,12 +63,10 @@ const Form = styled.form`
   padding: 2rem;
 `;
 
-const Button = styled.button`
-  background-color: #ff9102;
-  color: #fff;
-  border-radius: 30px;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: 500;
+const Heading = styled.h3`
+  color: black;
+`;
+
+const Error = styled.h3`
+  color: black;
 `;
