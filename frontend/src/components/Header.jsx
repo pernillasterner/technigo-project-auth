@@ -26,16 +26,17 @@ export const Header = () => {
 };
 
 const HeaderContainer = styled.div`
-  background-color: black;
+  background-color: var( --sunset);
   width: 100%;
   height: 30px;
-  opacity: 80%;
   position: absolute;
   margin: -8px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  padding: 10px;
+  font-weight: 500;
 `;
 
 const StartPage = styled.div`
@@ -46,7 +47,7 @@ const StartPage = styled.div`
 `;
 
 const Register = styled.p`
-  color: white;
+  color: var( --ocean);
   cursor: pointer;
 
   &:hover {
@@ -55,7 +56,7 @@ const Register = styled.p`
 `;
 
 const Login = styled.p`
-  color: white;
+  color: var( --ocean);
   cursor: pointer;
 
   &:hover {
@@ -69,10 +70,12 @@ const LoggedIn = styled.div`
   justify-content: space-between;
   padding: 10px;
   width: 100vh;
+  color: white;
+  
 `;
 
 const Play = styled.p`
-  color: white;
+  color: var( --ocean);
   cursor: pointer;
 
   &:hover {
@@ -81,16 +84,16 @@ const Play = styled.p`
 `;
 
 const MyProgress = styled.p`
-  color: white;
+  color: var( --ocean);
   cursor: pointer;
-
+  
   &:hover {
     color: #fff9;
   }
 `;
 
 const SignOut = styled.p`
-  color: white;
+  color: var( --ocean);
   cursor: pointer;
 
   &:hover {
