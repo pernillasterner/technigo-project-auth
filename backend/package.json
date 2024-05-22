@@ -12,9 +12,14 @@
     "@babel/core": "^7.17.9",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
+    "bcrypt-nodejs": "^0.0.3",
     "cors": "^2.8.5",
     "express": "^4.17.3",
-    "mongoose": "^8.0.0",
+    "mongodb": "^6.6.2",
+    "mongoose": "^8.4.0",
     "nodemon": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/bcrypt-nodejs": "^0.0.31"
   }
 }
