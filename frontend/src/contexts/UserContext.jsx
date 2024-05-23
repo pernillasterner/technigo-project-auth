@@ -4,11 +4,15 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
+  //Uses the username to set the user and set isLoggedIn-state to true
   const login = (username) => {
     setUser({ username });
+    setIsLoggedIn(true)
   };
 
+  //Sends userData to backend to create a new user
   const registerUser = async (userData) => {
     console.log(userData); // I get correct data
     try {
@@ -27,6 +31,7 @@ export const UserProvider = ({ children }) => {
 
       const data = await response.json();
       console.log("Registration success", data);
+      setIsLoggedIn(true);
     } catch (err) {
       console.error("Error registering new user:", err);
     }
@@ -36,8 +41,9 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         user,
-        login,
         setUser,
+        isLoggedIn,
+        login,
         registerUser,
       }}
     >

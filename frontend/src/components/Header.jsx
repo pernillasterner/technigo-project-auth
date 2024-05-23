@@ -1,28 +1,38 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useLogin } from "../contexts/UserContext";
 
 export const Header = () => {
-  return (
-    <HeaderContainer>
-      <StartPage className="startPage">
-        <Link to={`/register`}>
-          <Register>Register here</Register>
-        </Link>
-        <Link to={`/login`}>
-          <Login>Log in</Login>
-        </Link>
-      </StartPage>
-      <LoggedIn className="loggedIn">
-        <Link to={`/play`}>
-          <Play>Play</Play>
-        </Link>
-        <Link to={`/myprogress`}>
-          <MyProgress>My progress</MyProgress>
-        </Link>
-        <SignOut>Sign out</SignOut>
-      </LoggedIn>
-    </HeaderContainer>
-  );
+  const { isLoggedIn } = useLogin();
+
+  if (isLoggedIn) {
+    return (
+      <HeaderContainer>
+        <LoggedIn className="loggedIn">
+          <Link to={`/play`}>
+            <Play>Play</Play>
+          </Link>
+          <Link to={`/myprogress`}>
+            <MyProgress>My progress</MyProgress>
+          </Link>
+          <SignOut>Sign out</SignOut>
+        </LoggedIn>
+      </HeaderContainer>
+    );
+  } else {
+    return (
+      <HeaderContainer>
+        <StartPage className="startPage">
+          <Link to={`/register`}>
+            <Register>Register here</Register>
+          </Link>
+          <Link to={`/login`}>
+            <Login>Log in</Login>
+          </Link>
+        </StartPage>
+      </HeaderContainer>
+    );
+  }
 };
 
 const HeaderContainer = styled.div`
