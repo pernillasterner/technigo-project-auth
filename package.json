@@ -5,6 +5,7 @@
     "postinstall": "npm install --prefix backend"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "react-router": "^6.23.1",
     "styled-components": "^6.1.11"
   }
