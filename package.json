@@ -2,8 +2,7 @@
   "name": "project-auth-parent",
   "version": "1.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "node server.js",
     "postinstall": "npm install --prefix backend"
   },
   "dependencies": {
