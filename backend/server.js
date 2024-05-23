@@ -113,8 +113,8 @@ app.post("/sessions", async (req, res) => {
   }
 });
 
-app.post("/games", authenticateUser);
-app.post("/games", async (req, res) => {
+app.get("/games", authenticateUser);
+app.get("/games", async (req, res) => {
   res.send("You are logged in");
 });
 
