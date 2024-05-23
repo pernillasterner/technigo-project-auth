@@ -66,6 +66,15 @@ app.get("/", (req, res) => {
   res.send("Hello friend!");
 });
 
+app.get("/users", async (req, res) => {
+  const allUsers = await User.find().exec();
+  if (allUsers.length > 0) {
+    res.json(allUsers);
+  } else {
+    res.status(404).send("No users found");
+  }
+});
+
 //Create user with username and password
 app.post("/users", async (req, res) => {
   try {
@@ -113,8 +122,8 @@ app.post("/sessions", async (req, res) => {
   }
 });
 
-app.post("/games", authenticateUser);
-app.post("/games", async (req, res) => {
+app.get("/games", authenticateUser);
+app.get("/games", async (req, res) => {
   res.send("You are logged in");
 });
 
