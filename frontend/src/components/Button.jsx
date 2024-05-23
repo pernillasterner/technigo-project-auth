@@ -10,6 +10,7 @@ export const Button = styled.button`
   font-weight: 500;
   transition: 0.2s ease;
   text-decoration: none;
+  margin-top: 20px;
 
   &:hover {
     background-color: var(--raspberryhover);

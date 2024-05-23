@@ -76,7 +76,7 @@ export const RegistrationForm = () => {
         <Heading>Register</Heading>
 
         <label>
-          <input
+          <Input
             type="text"
             placeholder="Username"
             name="username"
@@ -85,7 +85,7 @@ export const RegistrationForm = () => {
           />
         </label>
         <label>
-          <input
+          <Input
             type="text"
             placeholder="First Name"
             name="firstName"
@@ -94,7 +94,7 @@ export const RegistrationForm = () => {
           />
         </label>
         <label>
-          <input
+          <Input
             type="text"
             placeholder="Last Name"
             name="lastName"
@@ -103,7 +103,7 @@ export const RegistrationForm = () => {
           />
         </label>
         <label>
-          <input
+          <Input
             type="text"
             placeholder="Age"
             name="age"
@@ -112,7 +112,7 @@ export const RegistrationForm = () => {
           />
         </label>
         <label>
-          <input
+          <Input
             type="email"
             placeholder="Email"
             name="email"
@@ -121,7 +121,7 @@ export const RegistrationForm = () => {
           />
         </label>
         <label>
-          <input
+          <Input
             type="password"
             placeholder="Password"
             name="password"
@@ -130,7 +130,7 @@ export const RegistrationForm = () => {
           />
         </label>
         <label>
-          <input
+          <Input
             type="password"
             placeholder="Confirm password"
             name="confirmPassword"
@@ -153,10 +153,26 @@ const RegistrationContainer = styled.div`
   margin: 0 auto;
 `;
 
+
+const Heading = styled.h1`
+  color: var( --vanilla);
+  text-align: center;
+  margin-top: 0;
+`;
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   padding: 2rem;
+  background-color: var( --ocean);
+  border-radius: 20px;
+`;
+
+const Input = styled.input`
+   border-radius: 20px;
+   padding: 10px 15px;
+   border: none;
+   background-color: var( --vanilla);
 `;
 
 const ErrorMessage = styled.div`
@@ -164,6 +180,4 @@ const ErrorMessage = styled.div`
   font-size: 13px;
 `;
 
-const Heading = styled.h3`
-  color: black;
-`;
+

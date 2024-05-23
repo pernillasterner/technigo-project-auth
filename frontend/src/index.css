@@ -26,7 +26,7 @@ code {
 }
 
 body {
-  background-color: var(--sunset);
+  background-color: var( --vanilla);
 }
 
 main {
