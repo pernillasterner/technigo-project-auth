@@ -60,14 +60,18 @@ const GameCard = styled.div`
   background-color: var(--teal);
   font-size: 20px;
 
+  &:hover {
+      transition: 0.2s ease;
+      };
+
   ${({ math }) =>
     math &&
     css`
+      box-shadow: 10px 10px var(--oceanactive);
       background-color: var(--ocean);
 
-      &:hover {
-      box-shadow: 15px 15px black;
-      transition: 0.04s ease;
+  &:hover {
+      box-shadow: 15px 15px var(--oceanactive);
       };
     `}
 
@@ -76,23 +80,25 @@ const GameCard = styled.div`
     swedish &&
     css`
       background-color: var( --raspberry);
+      box-shadow: 10px 10px var(--raspberryactive);
 
       &:hover {
-      box-shadow: 15px 15px black;
-      transition: 0.04s ease;
+      box-shadow: 15px 15px var(--raspberryactive);
       };
-
     `}
 
   ${({ english }) =>
     english &&
     css`
       background-color: var( --teal);
+      box-shadow: 10px 10px var(--tealactive);
 
       &:hover {
-      box-shadow: 15px 15px black;
-      transition: 0.04s ease;
+      box-shadow: 15px 15px var(--tealactive);
       };
-
     `}
+
+   @media (min-width: 900px) {
+       margin: 40px;
+        }
 `;
