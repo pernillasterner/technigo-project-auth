@@ -1,8 +1,8 @@
 import { createContext, useContext, useState } from "react";
-// import dotenv from "dotenv";
+import dotenv from "dotenv";
 
 // Load environment variables from .env file
-// dotenv.config();
+dotenv.config();
 
 const UserContext = createContext();
 
@@ -21,13 +21,16 @@ export const UserProvider = ({ children }) => {
     console.log(userData); // I get correct data
     try {
       // Ensure this points to the correct backend URL
-      const response = await fetch("http://localhost:8000/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
+      const response = await fetch(
+        process.env.API_URL || "http://localhost:8000/users",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
       console.log(response);
       if (!response.ok) {
         throw new Error("Failed to register user");
