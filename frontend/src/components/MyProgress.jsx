@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Progress = () => {
-  return <ProgressTitle>My Progress</ProgressTitle>;
+  return <ProgressTitle>Hi Name, here you can see your progress!</ProgressTitle>;
 };
 
 const ProgressTitle = styled.h2`
