@@ -3,11 +3,14 @@ import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt-nodejs";
 import crypto from "crypto";
+import { log } from "console";
 
 // Defining port and connecting to mongoose
 const port = process.env.PORT || 8000;
 const app = express();
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/auth";
+
+console.log("Connecting to MongoDB at:", mongoUrl);
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
@@ -103,7 +106,8 @@ app.post("/users", async (req, res) => {
 app.post("/sessions", async (req, res) => {
   const userByUsername = await User.findOne({ username: req.body.username });
   const userByEmail = await User.findOne({ email: req.body.email });
-
+  console.log(userByUsername);
+  console.log(userByEmail);
   if (
     userByUsername &&
     bcrypt.compareSync(req.body.password, userByUsername.password)
@@ -112,12 +116,15 @@ app.post("/sessions", async (req, res) => {
       userId: userByUsername._id,
       accessToken: userByUsername.accessToken,
     });
+    console.error("Success - userByUsername");
   } else if (
     userByEmail &&
     bcrypt.compareSync(req.body.password, userByEmail.password)
   ) {
+    console.error("Success - userByEmail");
     res.json({ userId: userByEmail._id, accessToken: userByEmail.accessToken });
   } else {
+    console.error("User not found:", error);
     res.json({ notFound: true });
   }
 });
