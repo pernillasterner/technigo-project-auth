@@ -64,7 +64,7 @@ export const RegistrationForm = () => {
       });
 
       // Redirect to login page
-      navigate("/login");
+      navigate("/play");
     } catch (err) {
       console.error("Error registration user", err);
     }
@@ -153,9 +153,8 @@ const RegistrationContainer = styled.div`
   margin: 0 auto;
 `;
 
-
 const Heading = styled.h1`
-  color: var( --vanilla);
+  color: var(--vanilla);
   text-align: center;
   margin-top: 0;
 `;
@@ -164,20 +163,18 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  background-color: var( --ocean);
+  background-color: var(--ocean);
   border-radius: 20px;
 `;
 
 const Input = styled.input`
-   border-radius: 20px;
-   padding: 10px 15px;
-   border: none;
-   background-color: var( --vanilla);
+  border-radius: 20px;
+  padding: 10px 15px;
+  border: none;
+  background-color: var(--vanilla);
 `;
 
 const ErrorMessage = styled.div`
   color: red;
   font-size: 13px;
 `;
-
-
