@@ -12,7 +12,7 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(username, password);
+      await login({ username, password });
     } catch (error) {
       setError("Invalid username or password");
     }
@@ -58,7 +58,7 @@ const LoginContainer = styled.div`
 `;
 
 const Heading = styled.h1`
-  color: var( --vanilla);
+  color: var(--vanilla);
   text-align: center;
   margin-top: 0;
 `;
@@ -67,15 +67,15 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  background-color: var( --teal);
+  background-color: var(--teal);
   border-radius: 20px;
 `;
 
 const Input = styled.input`
-   border-radius: 20px;
-   padding: 10px 15px;
-   border: none;
-   background-color: var( --vanilla);
+  border-radius: 20px;
+  padding: 10px 15px;
+  border: none;
+  background-color: var(--vanilla);
 `;
 
 const Error = styled.h3`
