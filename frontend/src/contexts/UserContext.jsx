@@ -22,7 +22,7 @@ export const UserProvider = ({ children }) => {
     try {
       // Ensure this points to the correct backend URL
       const response = await fetch(
-        "https://technigo-project-auth.onrender.com",
+        "https://technigo-project-auth.onrender.com/users",
         {
           method: "POST",
           headers: {
