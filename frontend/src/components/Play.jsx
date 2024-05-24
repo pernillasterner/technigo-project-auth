@@ -1,23 +1,32 @@
 import styled, { css } from "styled-components";
+import { useLogin } from "../contexts/UserContext";
 import { Link } from "react-router-dom";
 
 export const Play = () => {
-  return (
-    <PlayContainer>
-      <PlayTitle>Welcome to Pluggin, Name. Ready to play some games?</PlayTitle>
-      <GamesCards>
-        <Link to={`/play/math`}>
-          <GameCard math>Play a math game!</GameCard>
-        </Link>
-        <Link to={`/play/swedish`}>
-          <GameCard swedish>Play a Swedish game!</GameCard>
-        </Link>
-        <Link to={`/play/english`}>
-          <GameCard english>Play an English game!</GameCard>
-        </Link>
-      </GamesCards>
-    </PlayContainer>
-  );
+  const { isLoggedIn } = useLogin();
+
+  if (isLoggedIn) {
+    return (
+      <PlayContainer>
+        <PlayTitle>Welcome to Pluggin, Name. Ready to play some games?</PlayTitle>
+        <GamesCards>
+          <Link to={`/play/math`}>
+            <GameCard math>Play a math game!</GameCard>
+          </Link>
+          <Link to={`/play/swedish`}>
+            <GameCard swedish>Play a Swedish game!</GameCard>
+          </Link>
+          <Link to={`/play/english`}>
+            <GameCard english>Play an English game!</GameCard>
+          </Link>
+        </GamesCards>
+      </PlayContainer>
+    );
+  } else {
+    return (
+      <Text>You need to log in!</Text>
+    )
+  }
 };
 
 const PlayContainer = styled.div`
@@ -102,3 +111,9 @@ const GameCard = styled.div`
        margin: 40px;
         }
 `;
+
+const Text = styled.p`
+  font-size: 36px;
+  text-align: center;
+  width: 100vw;
+`
