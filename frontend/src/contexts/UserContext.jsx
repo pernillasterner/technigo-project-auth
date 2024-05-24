@@ -1,8 +1,8 @@
 import { createContext, useContext, useState } from "react";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 
 // Load environment variables from .env file
-dotenv.config();
+// dotenv.config();
 
 const UserContext = createContext();
 
