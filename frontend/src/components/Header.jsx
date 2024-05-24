@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useLogin } from "../contexts/UserContext";
+import signoutIcon from "/src/assets/signouticon.png";
 
 export const Header = () => {
-  const { isLoggedIn } = useLogin();
+  const { isLoggedIn, signout } = useLogin();
 
   if (isLoggedIn) {
     return (
@@ -15,7 +16,10 @@ export const Header = () => {
           <Link to={`/myprogress`}>
             <MyProgress>My progress</MyProgress>
           </Link>
-          <SignOut>Sign out</SignOut>
+          <SignOut>
+          <SignOutText onClick={signout}>Sign out</SignOutText>
+          <SignOutIcon onClick={signout} src={signoutIcon}/> 
+          </SignOut>
         </LoggedIn>
       </HeaderContainer>
     );
@@ -61,16 +65,24 @@ const Register = styled.p`
   cursor: pointer;
 
   &:hover {
-    color: #fff9;
+    color: var( --oceanhover);
+  }
+
+  &:active {
+    color: var( --oceanactive);
   }
 `;
 
 const Login = styled.p`
-  color: var( --ocean);
+   color: var( --ocean);
   cursor: pointer;
 
   &:hover {
-    color: #fff9;
+    color: var( --oceanhover);
+  }
+
+  &:active {
+    color: var( --oceanactive);
   }
 `;
 
@@ -89,7 +101,11 @@ const Play = styled.p`
   cursor: pointer;
 
   &:hover {
-    color: #fff9;
+    color: var( --oceanhover);
+  }
+
+  &:active {
+    color: var( --oceanactive);
   }
 `;
 
@@ -97,16 +113,44 @@ const MyProgress = styled.p`
   color: var( --ocean);
   cursor: pointer;
   
-  &:hover {
-    color: #fff9;
+   &:hover {
+    color: var( --oceanhover);
+  }
+
+  &:active {
+    color: var( --oceanactive);
   }
 `;
 
-const SignOut = styled.p`
+const SignOut = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  cursor: pointer;
+
+   &:hover {
+    opacity: 70%;
+  }
+`;
+
+const SignOutText = styled.p`
   color: var( --ocean);
   cursor: pointer;
 
-  &:hover {
-    color: #fff9;
+
+  &:active {
+    color: var( --oceanactive);
   }
 `;
+
+const SignOutIcon = styled.img`
+  width: 17px;
+  height: 22px;
+  align-items: center;
+  padding-top: 17px;
+  opacity: 100%;
+  
+  
+ 
+`;
+

@@ -150,7 +150,13 @@ const RegistrationContainer = styled.div`
   border-radius: 20px;
   max-width: fit-content;
   height: fit-content;
+  padding-top: 80px;
   margin: 0 auto;
+
+  @media (min-width: 700px){
+    padding-top: 50px;
+    
+}
 `;
 
 const Heading = styled.h1`
@@ -165,13 +171,19 @@ const Form = styled.form`
   padding: 2rem;
   background-color: var(--ocean);
   border-radius: 20px;
+ 
+   @media (min-width: 700px){
+    padding: 2rem 2.5rem;
+    
+}
 `;
 
 const Input = styled.input`
   border-radius: 20px;
-  padding: 10px 15px;
+  padding: 10px 30px;
   border: none;
   background-color: var(--vanilla);
+
 `;
 
 const ErrorMessage = styled.div`
