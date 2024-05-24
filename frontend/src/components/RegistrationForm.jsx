@@ -146,7 +146,6 @@ export const RegistrationForm = () => {
 };
 
 const RegistrationContainer = styled.div`
-  background: #fff;
   border-radius: 20px;
   max-width: fit-content;
   height: fit-content;
