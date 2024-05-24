@@ -11,10 +11,37 @@ export const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //Uses the username to set the user and set isLoggedIn-state to true
-  const login = (username) => {
+  /* const login = (username, password) => {
     setUser({ username });
     setIsLoggedIn(true);
-  };
+  };*/
+
+  // const login = async (userData) => {
+  //   console.log(userData); // I get correct data
+  //   try {
+  //     // Ensure this points to the correct backend URL
+  //     const response = await fetch(
+  //       "https://technigo-project-auth.onrender.com",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(userData),
+  //       }
+  //     );
+  //     console.log(response);
+  //     if (!response.ok) {
+  //       throw new Error("Failed to register user");
+  //     }
+
+  //     const data = await response.json();
+  //     console.log("Registration success", data);
+  //     setIsLoggedIn(true);
+  //   } catch (err) {
+  //     console.error("Error registering new user:", err);
+  //   }
+  // };
 
   //Sends userData to backend to create a new user
   const registerUser = async (userData) => {
@@ -22,7 +49,7 @@ export const UserProvider = ({ children }) => {
     try {
       // Ensure this points to the correct backend URL
       const response = await fetch(
-        "https://technigo-project-auth.onrender.com",
+        "https://technigo-project-auth.onrender.com/users",
         {
           method: "POST",
           headers: {
