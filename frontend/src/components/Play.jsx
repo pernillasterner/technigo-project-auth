@@ -1,14 +1,50 @@
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { useLogin } from "../contexts/UserContext";
-import { Link } from "react-router-dom";
 
 export const Play = () => {
-  const { isLoggedIn } = useLogin();
+  const { isLoggedIn, setIsLoggedIn } = useLogin();
+
+  const getContent = async () => {
+    const accessToken = localStorage.getItem("accessToken");
+    console.log("Token", accessToken); // I get correct data
+    try {
+      // Ensure this points to the correct backend URL
+      const response = await fetch(
+        "https://technigo-project-auth.onrender.com/games",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": accessToken,
+          },
+        }
+      );
+      console.log(response);
+      if (!response.ok) {
+        setIsLoggedIn(false);
+        throw new Error("Failed to get user");
+      }
+
+      const data = await response.json();
+      console.log("Login success", data);
+      setIsLoggedIn(true);
+    } catch (err) {
+      console.error("No user was found:", err);
+    }
+  };
+
+  useEffect(() => {
+    getContent();
+  }, []);
 
   if (isLoggedIn) {
     return (
       <PlayContainer>
-        <PlayTitle>Welcome to Pluggin, Name. Ready to play some games?</PlayTitle>
+        <PlayTitle>
+          Welcome to Pluggin, Name. Ready to play some games?
+        </PlayTitle>
         <GamesCards>
           <Link to={`/play/math`}>
             <GameCard math>Play a math game!</GameCard>
@@ -23,9 +59,7 @@ export const Play = () => {
       </PlayContainer>
     );
   } else {
-    return (
-      <Text>You need to log in!</Text>
-    )
+    return <Text>You need to log in!</Text>;
   }
 };
 
@@ -70,8 +104,8 @@ const GameCard = styled.div`
   font-size: 20px;
 
   &:hover {
-      transition: 0.2s ease;
-      };
+    transition: 0.2s ease;
+  }
 
   ${({ math }) =>
     math &&
@@ -79,41 +113,40 @@ const GameCard = styled.div`
       box-shadow: 10px 10px var(--oceanactive);
       background-color: var(--ocean);
 
-  &:hover {
-      box-shadow: 15px 15px var(--oceanactive);
-      };
+      &:hover {
+        box-shadow: 15px 15px var(--oceanactive);
+      }
     `}
-
 
   ${({ swedish }) =>
     swedish &&
     css`
-      background-color: var( --raspberry);
+      background-color: var(--raspberry);
       box-shadow: 10px 10px var(--raspberryactive);
 
       &:hover {
-      box-shadow: 15px 15px var(--raspberryactive);
-      };
+        box-shadow: 15px 15px var(--raspberryactive);
+      }
     `}
 
   ${({ english }) =>
     english &&
     css`
-      background-color: var( --teal);
+      background-color: var(--teal);
       box-shadow: 10px 10px var(--tealactive);
 
       &:hover {
-      box-shadow: 15px 15px var(--tealactive);
-      };
+        box-shadow: 15px 15px var(--tealactive);
+      }
     `}
 
    @media (min-width: 900px) {
-       margin: 40px;
-        }
+    margin: 40px;
+  }
 `;
 
 const Text = styled.p`
   font-size: 36px;
   text-align: center;
   width: 100vw;
-`
+`;

@@ -89,6 +89,8 @@ export const UserProvider = ({ children }) => {
         user,
         setUser,
         isLoggedIn,
+        setIsLoggedIn,
+        authenticated,
         login,
         registerUser,
       }}
