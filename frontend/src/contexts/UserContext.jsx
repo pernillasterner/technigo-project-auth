@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import dotenv from "dotenv";
 
 // Load environment variables from .env file
@@ -13,6 +14,7 @@ export const UserProvider = ({ children }) => {
     accessToken: localStorage.getItem("accessToken"),
     auth: false,
   });
+  const navigate = useNavigate();
 
   //Uses the username to set the user and set isLoggedIn-state to true
   /* const login = (username, password) => {
@@ -55,6 +57,18 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+
+  const signout = () => {
+    localStorage.removeItem("accessToken")
+    setIsLoggedIn(false);
+    setAuthenticated({
+      
+      auth: false,
+    })
+    navigate("/login");
+    console.log("Sign out successful")
+  }
+
   // Function that sends userData to MongoDB to create a new user
   const registerUser = async (userData) => {
     console.log(userData); // I get correct data
@@ -90,6 +104,7 @@ export const UserProvider = ({ children }) => {
         setUser,
         isLoggedIn,
         login,
+        signout,
         registerUser,
       }}
     >
