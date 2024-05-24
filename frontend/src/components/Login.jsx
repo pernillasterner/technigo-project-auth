@@ -45,7 +45,7 @@ export const Login = () => {
           />
         </label>
         <Button type="submit" className="loginBtn">
-          Login
+          Log in
         </Button>
       </Form>
     </LoginContainer>
@@ -58,6 +58,11 @@ const LoginContainer = styled.div`
   max-width: fit-content;
   height: fit-content;
   margin: 0 auto;
+
+    @media (min-width: 700px){
+    padding-top: 50px;
+    
+}
 `;
 
 const Heading = styled.h1`
@@ -72,11 +77,16 @@ const Form = styled.form`
   padding: 2rem;
   background-color: var(--teal);
   border-radius: 20px;
+
+    @media (min-width: 700px){
+    padding: 2rem 2.5rem;
+    
+}
 `;
 
 const Input = styled.input`
   border-radius: 20px;
-  padding: 10px 15px;
+  padding: 10px 30px;
   border: none;
   background-color: var(--vanilla);
 `;
