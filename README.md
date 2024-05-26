@@ -11,3 +11,11 @@ We had some problems deploying both the frontend and backend, but we worked toge
 [Frontend](https://pluggin.netlify.app/)
 
 [Backend](https://technigo-project-auth.onrender.com/)
+
+## Contributors
+
+Thanks to these great people for contributing to this project:
+
+- [@Tejpex](https://github.com/Tejpex)
+- [@fridaforser](https://github.com/fridaforser)
+- [@KatSjolin](https://github.com/KatSjolin)
