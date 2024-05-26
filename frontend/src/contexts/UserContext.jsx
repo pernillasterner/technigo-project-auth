@@ -16,14 +16,7 @@ export const UserProvider = ({ children }) => {
   });
   const navigate = useNavigate();
 
-  //Uses the username to set the user and set isLoggedIn-state to true
-  /* const login = (username, password) => {
-    setUser({ username });
-    setIsLoggedIn(true);
-  };*/
-
   const login = async (loginData, accessToken) => {
-    console.log(loginData); // I get correct data
     try {
       // Ensure this points to the correct backend URL
       const response = await fetch(
@@ -36,8 +29,8 @@ export const UserProvider = ({ children }) => {
           body: JSON.stringify(loginData),
         }
       );
-      console.log(response);
       if (!response.ok) {
+        console.log("Login failed")
         throw new Error("Failed to get user");
       }
 
@@ -62,16 +55,13 @@ export const UserProvider = ({ children }) => {
     localStorage.removeItem("accessToken")
     setIsLoggedIn(false);
     setAuthenticated({
-      
       auth: false,
     })
     navigate("/login");
-    console.log("Sign out successful")
   }
 
   // Function that sends userData to MongoDB to create a new user
   const registerUser = async (userData) => {
-    console.log(userData); // I get correct data
     try {
       // Ensure this points to the correct backend URL
       const response = await fetch(
@@ -84,7 +74,6 @@ export const UserProvider = ({ children }) => {
           body: JSON.stringify(userData),
         }
       );
-      console.log(response);
       if (!response.ok) {
         throw new Error("Failed to register user");
       }
