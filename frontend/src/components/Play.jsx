@@ -5,10 +5,10 @@ import { useLogin } from "../contexts/UserContext";
 
 export const Play = () => {
   const { isLoggedIn, setIsLoggedIn } = useLogin();
+  let message = ""
 
   const getContent = async () => {
     const accessToken = localStorage.getItem("accessToken");
-    console.log("Token", accessToken); // I get correct data
     try {
       // Ensure this points to the correct backend URL
       const response = await fetch(
@@ -29,6 +29,7 @@ export const Play = () => {
 
       const data = await response.json();
       console.log("Login success", data);
+      message = data.message
       setIsLoggedIn(true);
     } catch (err) {
       console.error("No user was found:", err);
@@ -45,6 +46,7 @@ export const Play = () => {
         <PlayTitle>
           Welcome to Pluggin, Name. Ready to play some games?
         </PlayTitle>
+        {message && <SecretText>{message}</SecretText>}    
         <GamesCards>
           <Link to={`/play/math`}>
             <GameCard math>Play a math game!</GameCard>
@@ -150,3 +152,9 @@ const Text = styled.p`
   text-align: center;
   width: 100vw;
 `;
+
+const SecretText = styled.p`
+  font-size: 14px;
+  text-align: center;
+  color: red;
+`

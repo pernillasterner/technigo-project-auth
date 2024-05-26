@@ -83,7 +83,7 @@ app.get("/", (req, res) => {
 app.get("/users", async (req, res) => {
   const allUsers = await User.find().exec();
   if (allUsers.length > 0) {
-    res.json(allUsers);
+    res.status(200).json(allUsers);
   } else {
     res.status(404).send("No users found");
   }
@@ -119,7 +119,7 @@ app.post("/sessions", async (req, res) => {
     userByUsername &&
     bcrypt.compareSync(req.body.password, userByUsername.password)
   ) {
-    res.json({
+    res.status(200).json({
       userId: userByUsername._id,
       accessToken: userByUsername.accessToken,
     });
@@ -127,15 +127,17 @@ app.post("/sessions", async (req, res) => {
     userByEmail &&
     bcrypt.compareSync(req.body.password, userByEmail.password)
   ) {
-    res.json({ userId: userByEmail._id, accessToken: userByEmail.accessToken });
+    res.status(200).json({ userId: userByEmail._id, accessToken: userByEmail.accessToken });
   } else {
-    res.json({ notFound: true });
+    res.status(404).json({ notFound: true });
   }
 });
 
 app.get("/games", authenticateUser);
 app.get("/games", async (req, res) => {
-  res.json({ message: "You are logged in"});
+  res
+    .status(200)
+    .json({ message: "Secret message only for logged in users to see!" });
 });
 
 // Start the server
