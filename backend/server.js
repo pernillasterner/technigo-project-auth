@@ -3,7 +3,6 @@ import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt-nodejs";
 import crypto from "crypto";
-import { log } from "console";
 
 // Defining port and connecting to mongoose
 const port = process.env.PORT || 8000;
@@ -49,17 +48,6 @@ const User = mongoose.model("User", {
 });
 
 //Authenticate user as middleware
-/*const authenticateUser = async (req, res, next) => {
-  const user = await User.findOne({ accessToken: req.header("Authorization") });
-  if (user) {
-    console.log("User is found", user);
-    req.user = user;
-    next();
-  } else {
-    req.status(401).json({ loggedOut: true });
-  }
-};*/
-
 const authenticateUser = async (req, res, next) => {
   const accessToken = req.header("Authorization");
   if (!accessToken) {
@@ -67,13 +55,13 @@ const authenticateUser = async (req, res, next) => {
   }
 
   const user = await User.findone({ accessToken })
-  if (!user) {
+  if (user) {
+    console.log("User is found", user);
+    req.user = user;
+    next();
+  } else {
     return res.status(403).json({ error: "Forbidden: Invalid access token" });
   }
-
-  console.log("User is found", user);
-  req.user = user;
-  next();
 };
 
 // Middlewares to enable cors and json body parsing
@@ -111,7 +99,6 @@ app.post("/users", async (req, res) => {
     res.status(201).json(user);
     //res.status(201).json({ id: user._id, accessToken: user.accessToken });
   } catch (error) {
-    console.error("Error creating user:", error);
     res
       .status(400)
       .json({ response: error, message: "Could not create user." });
@@ -122,8 +109,6 @@ app.post("/users", async (req, res) => {
 app.post("/sessions", async (req, res) => {
   const userByUsername = await User.findOne({ username: req.body.username });
   const userByEmail = await User.findOne({ email: req.body.email });
-  console.log(userByUsername);
-  console.log(userByEmail);
   if (
     userByUsername &&
     bcrypt.compareSync(req.body.password, userByUsername.password)
@@ -132,15 +117,12 @@ app.post("/sessions", async (req, res) => {
       userId: userByUsername._id,
       accessToken: userByUsername.accessToken,
     });
-    console.error("Success - userByUsername");
   } else if (
     userByEmail &&
     bcrypt.compareSync(req.body.password, userByEmail.password)
   ) {
-    console.error("Success - userByEmail");
     res.json({ userId: userByEmail._id, accessToken: userByEmail.accessToken });
   } else {
-    console.error("User not found:", error);
     res.json({ notFound: true });
   }
 });
