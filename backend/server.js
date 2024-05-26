@@ -49,7 +49,7 @@ const User = mongoose.model("User", {
 });
 
 //Authenticate user as middleware
-const authenticateUser = async (req, res, next) => {
+/*const authenticateUser = async (req, res, next) => {
   const user = await User.findOne({ accessToken: req.header("Authorization") });
   if (user) {
     console.log("User is found", user);
@@ -58,6 +58,22 @@ const authenticateUser = async (req, res, next) => {
   } else {
     req.status(401).json({ loggedOut: true });
   }
+};*/
+
+const authenticateUser = async (req, res, next) => {
+  const accessToken = req.header("Authorization");
+  if (!accessToken) {
+    return res.status(401).json({ error: "Unauthorized: Missing access token" });
+  }
+
+  const user = await User.findone({ accessToken })
+  if (!user) {
+    return res.status(403).json({ error: "Forbidden: Invalid access token" });
+  }
+
+  console.log("User is found", user);
+  req.user = user;
+  next();
 };
 
 // Middlewares to enable cors and json body parsing
