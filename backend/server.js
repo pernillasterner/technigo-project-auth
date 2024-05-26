@@ -67,6 +67,13 @@ const authenticateUser = async (req, res, next) => {
 // Middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: "Service unavailable." });
+  }
+});
 
 // Defining routes
 app.get("/", (req, res) => {
@@ -82,7 +89,7 @@ app.get("/users", async (req, res) => {
   }
 });
 
-//Create user with username and password
+//Create user with username, password etc.
 app.post("/users", async (req, res) => {
   try {
     const { username, firstName, lastName, age, email, password } = req.body;
@@ -96,8 +103,7 @@ app.post("/users", async (req, res) => {
       password: bcrypt.hashSync(password, salt),
     });
     await user.save();
-    res.status(201).json(user);
-    //res.status(201).json({ id: user._id, accessToken: user.accessToken });
+    res.status(201).json({ id: user._id, accessToken: user.accessToken });
   } catch (error) {
     res
       .status(400)
