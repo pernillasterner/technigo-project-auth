@@ -80,6 +80,7 @@ app.get("/", (req, res) => {
   res.send("Hello friend!");
 });
 
+//User-endpoint for developing purpose
 app.get("/users", async (req, res) => {
   const allUsers = await User.find().exec();
   if (allUsers.length > 0) {
@@ -119,9 +120,7 @@ app.post("/sessions", async (req, res) => {
     userByUsername &&
     bcrypt.compareSync(req.body.password, userByUsername.password)
   ) {
-    res.status(200).json({
-      userId: userByUsername._id,
-      accessToken: userByUsername.accessToken,
+    res.status(200).json({userId: userByUsername._id, accessToken: userByUsername.accessToken,
     });
   } else if (
     userByEmail &&

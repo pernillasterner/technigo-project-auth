@@ -9,17 +9,18 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authenticated, setAuthenticated] = useState({
     accessToken: localStorage.getItem("accessToken"),
     auth: false,
   });
   const navigate = useNavigate();
 
+  //Uses password and username or email to do a login-request
   const login = async (loginData, accessToken) => {
     try {
       // Ensure this points to the correct backend URL
       const response = await fetch(
+        //"http://localhost:8000/sessions",
         "https://technigo-project-auth.onrender.com/sessions",
         {
           method: "POST",
@@ -29,11 +30,12 @@ export const UserProvider = ({ children }) => {
           body: JSON.stringify(loginData),
         }
       );
+      //Not successful
       if (!response.ok) {
-        console.log("Login failed")
+        console.log("Login failed");
         throw new Error("Failed to get user");
       }
-
+      //Successful
       const data = await response.json();
       console.log("Login success", data);
 
@@ -43,8 +45,6 @@ export const UserProvider = ({ children }) => {
         accessToken,
         auth: true,
       });
-
-      setIsLoggedIn(true);
     } catch (err) {
       console.error("No user was found:", err);
     }
@@ -53,7 +53,6 @@ export const UserProvider = ({ children }) => {
 
   const signout = () => {
     localStorage.removeItem("accessToken")
-    setIsLoggedIn(false);
     setAuthenticated({
       auth: false,
     })
@@ -65,6 +64,7 @@ export const UserProvider = ({ children }) => {
     try {
       // Ensure this points to the correct backend URL
       const response = await fetch(
+        //"http://localhost:8000/users",
         "https://technigo-project-auth.onrender.com/users",
         {
           method: "POST",
@@ -80,7 +80,13 @@ export const UserProvider = ({ children }) => {
 
       const data = await response.json();
       console.log("Registration success", data);
-      setIsLoggedIn(true);
+
+      // Save accesstoken in local storage
+      localStorage.setItem("accessToken", data.accessToken);
+      setAuthenticated({
+        //accessToken: data.accessToken,
+        auth: true,
+      });
     } catch (err) {
       console.error("Error registering new user:", err);
     }
@@ -91,9 +97,8 @@ export const UserProvider = ({ children }) => {
       value={{
         user,
         setUser,
-        isLoggedIn,
-        setIsLoggedIn,
         authenticated,
+        setAuthenticated,
         login,
         signout,
         registerUser,

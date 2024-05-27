@@ -1,36 +1,41 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { useLogin } from "../contexts/UserContext";
 
 export const Play = () => {
-  const { isLoggedIn, setIsLoggedIn } = useLogin();
-  let message = ""
+  const { authenticated, setAuthenticated } = useLogin();
+  const [message, setMessage] = useState("")
 
   const getContent = async () => {
     const accessToken = localStorage.getItem("accessToken");
     try {
       // Ensure this points to the correct backend URL
       const response = await fetch(
+        //"http://localhost:8000/games",
         "https://technigo-project-auth.onrender.com/games",
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": accessToken,
+            Authorization: accessToken,
           },
         }
       );
       console.log(response);
       if (!response.ok) {
-        setIsLoggedIn(false);
+        setAuthenticated({
+          auth: false,
+        });
         throw new Error("Failed to get user");
       }
 
       const data = await response.json();
       console.log("Login success", data);
-      message = data.message
-      setIsLoggedIn(true);
+      setMessage(data.message)
+      setAuthenticated({
+        auth: true,
+      });
     } catch (err) {
       console.error("No user was found:", err);
     }
@@ -38,9 +43,10 @@ export const Play = () => {
 
   useEffect(() => {
     getContent();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (isLoggedIn) {
+  if (authenticated.auth) {
     return (
       <PlayContainer>
         <PlayTitle>
