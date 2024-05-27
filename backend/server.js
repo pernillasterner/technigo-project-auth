@@ -54,7 +54,7 @@ const authenticateUser = async (req, res, next) => {
     return res.status(401).json({ error: "Unauthorized: Missing access token" });
   }
 
-  const user = await User.findone({ accessToken })
+  const user = await User.findOne({ accessToken })
   if (user) {
     console.log("User is found", user);
     req.user = user;
