@@ -8,7 +8,7 @@ We had some problems deploying both the frontend and backend, but we worked toge
 
 ## View it live
 
-[Frontend](https://pluggin.netlify.app/)
+[Frontend](https://technigo-project-auth.netlify.app/)
 
 [Backend](https://technigo-project-auth.onrender.com/)
 
